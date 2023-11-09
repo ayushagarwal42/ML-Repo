@@ -6,7 +6,7 @@ from src.visualization import visualize_data
 
 
 def main():
-    data_file = "C:/Users/This PC/Desktop/Machine Learning/ML-Repo/diabetes.csv"
+    data_file = "diabetes.csv"
 
     # Load and preprocess data
     df = load_data(data_file)
