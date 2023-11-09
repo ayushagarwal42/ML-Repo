@@ -14,7 +14,7 @@ def main():
     X_scaled, y = preprocess_data(df)
 
     # Visualize data
-    # visualize_data(df)
+    visualize_data(df)
 
     # Train and evaluate classification models
     train_classification_models(X_scaled, y)

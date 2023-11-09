@@ -1,14 +1,14 @@
 # classification.py
 
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from src.Classification.LogisticRegression import LogisticRegression
+from src.Classification.KNN import KNN
+from src.Classification.SVM import SVM
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
-from src.Classification.LogisticRegression import LogisticRegression
 
 
 def train_classification_models(X, y):
@@ -21,19 +21,20 @@ def train_classification_models(X, y):
 
     # Example: Train and evaluate classification models
     models = {
-        "Random Forest": RandomForestClassifier(),
-        "K-Nearest Neighbors": KNeighborsClassifier(n_neighbors=5),
+        "Logistic Regression": LogisticRegression(lr=0.01),
+        "Euclidean K-Nearest Neighbors": KNN(k=13, distance_metric='euclidean'),
+        "Manhattan K-Nearest Neighbors": KNN(k=13, distance_metric='manhattan'),
+        "Support Vector Machine": SVM(),
         "Naive Bayes": GaussianNB(),
-        "Support Vector Machine": SVC(),
         "Decision Tree": DecisionTreeClassifier(),
-        "Logistic Regression": LogisticRegression(lr=0.01)
+        "Random Forest": RandomForestClassifier()
     }
 
     for model_name, model in models.items():
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
-        classification_rep = classification_report(y_test, y_pred)
+        classification_rep = classification_report(y_test, y_pred, zero_division=1)
         confusion_mat = confusion_matrix(y_test, y_pred)
 
         print(f"Model: {model_name}")
