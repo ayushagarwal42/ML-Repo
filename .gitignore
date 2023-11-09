@@ -1,0 +1,4 @@
+__pycache__
+diabetes.csv
+.idea
+src/train_test_split.py
